@@ -14,16 +14,18 @@ namespace Securiton.HealthRecordAutomation
     {
         
         [Test]
-        public void ValidLoginTest()
+        [TestCase("admin","pass","English (Indian)","OpenEMR")]
+        [TestCase("accountant", "accountant", "English (Indian)", "OpenEMR")]
+        public void ValidLoginTest(string username,string password,string language,string expectedTitle)
         {
-            driver.FindElement(By.Id("authUser")).SendKeys("physician");
-            driver.FindElement(By.CssSelector("#clearPass")).SendKeys("physician");
+            driver.FindElement(By.Id("authUser")).SendKeys(username);
+            driver.FindElement(By.CssSelector("#clearPass")).SendKeys(password);
             SelectElement selectLanguage = new SelectElement(driver.FindElement(By.CssSelector("select[name='languageChoice']")));
-            selectLanguage.SelectByText("English (Indian)");
+            selectLanguage.SelectByText(language);
             driver.FindElement(By.Id("login-button")).Click();
 
             //wait for page load to complete 
-            Assert.That(driver.Title, Is.EqualTo("OpenEMR"));
+            Assert.That(driver.Title, Is.EqualTo(expectedTitle));
         }
 
         [Test]
