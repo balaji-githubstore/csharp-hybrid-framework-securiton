@@ -26,6 +26,21 @@ namespace Securiton.HealthRecordAutomation
             Assert.That(driver.Title, Is.EqualTo("OpenEMR"));
         }
 
+        [Test]
+        public void InvalidLoginTest()
+        {
+            driver.FindElement(By.Id("authUser")).SendKeys("john");
+            driver.FindElement(By.CssSelector("#clearPass")).SendKeys("john123");
+            SelectElement selectLanguage = new SelectElement(driver.FindElement(By.CssSelector("select[name='languageChoice']")));
+            selectLanguage.SelectByText("English (Indian)");
+            driver.FindElement(By.Id("login-button")).Click();
+
+            string actualError= driver.FindElement(By.XPath("//p[contains(text(),'Invalid')]")).Text;
+
+            //assert the error Invalid username or password
+            Assert.True(actualError.Contains("invalid username"),
+                "Assertion on Error message - actual error: "+actualError);
+        }
 
     }
 }
