@@ -32,7 +32,7 @@ namespace Securiton.HealthRecordAutomation.Pages
 
         public void EnterPassword(string password)
         {
-            driver.FindElement(_passwordLocator).SendKeys(password);
+            base.TypeByLocator(_passwordLocator,password);
         }
 
         public void SelectLanaguageByText(string language)
@@ -44,7 +44,7 @@ namespace Securiton.HealthRecordAutomation.Pages
 
         public void ClickOnLogin()
         {
-            driver.FindElement(_loginLocator).Click();
+            base.ClickByLocator(_loginLocator);
         }
 
         public string GetInvalidErrorMessage()

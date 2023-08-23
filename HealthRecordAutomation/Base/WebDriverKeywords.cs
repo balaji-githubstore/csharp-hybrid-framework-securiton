@@ -24,16 +24,32 @@ namespace Securiton.Base
         public void ClickByLocator(By locator)
         {
             //driver.FindElement(locator).Click();
-          
             wait.Until(x=>x.FindElement(locator)).Click();
-
         }
 
         public void TypeByLocator(By locator,string text)
         {
             //driver.FindElement(locator).SendKeys(text);
-            wait.Until(x => x.FindElement(locator))
+            wait.Until(x => x.FindElement(locator)).SendKeys(text);
         }
+
+        public void SwitchToWindowUsingTitle(string title)
+        {
+            var windows = driver.WindowHandles;
+
+            foreach (string win in windows)
+            {
+                Console.WriteLine(win);
+                driver.SwitchTo().Window(win);
+                Console.WriteLine(driver.Title);
+                if (driver.Title.Equals(title))
+                {
+                    break;
+                }
+                Console.WriteLine("----------------------------");
+            }
+        }
+
 
     }
 }
