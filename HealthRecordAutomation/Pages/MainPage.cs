@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Securiton.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HealthRecordAutomation.Pages
 {
-    public class MainPage
+    public class MainPage : WebDriverKeywords
     {
         private IWebDriver driver;
 
-        public MainPage(IWebDriver driver)
+        public MainPage(IWebDriver driver):base(driver) 
         {
             this.driver = driver;
         }

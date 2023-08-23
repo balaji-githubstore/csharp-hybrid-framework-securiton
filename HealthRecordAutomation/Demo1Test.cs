@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthRecordAutomation
+namespace Demo.HealthRecordAutomation
 {
     /// <summary>
     /// Will be deleted - not part of the framework

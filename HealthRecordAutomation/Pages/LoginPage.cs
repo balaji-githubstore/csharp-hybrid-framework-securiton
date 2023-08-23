@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Securiton.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Securiton.HealthRecordAutomation.Pages
 {
-    public class LoginPage
+    public class LoginPage : WebDriverKeywords
     {
         private By _usernameLocator = By.Id("authUser");
         private By _passwordLocator = By.CssSelector("#clearPass");
@@ -16,17 +17,17 @@ namespace Securiton.HealthRecordAutomation.Pages
         private By _loginLocator = By.Id("login-button");
         private By _errorLocator = By.XPath("//p[contains(text(),'Invalid')]");
 
-
         private IWebDriver driver;
 
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IWebDriver driver):base(driver)
         {
             this.driver = driver;
         }
 
         public void EnterUsername(string username)
         {
-            driver.FindElement(_usernameLocator).SendKeys(username);
+            //driver.FindElement(_usernameLocator).SendKeys(username);
+            base.TypeByLocator(_usernameLocator,username);
         }
 
         public void EnterPassword(string password)
