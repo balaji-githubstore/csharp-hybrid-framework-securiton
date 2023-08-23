@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Securiton.Base;
 using OpenQA.Selenium.Support.UI;
 using Securiton.HealthRecordAutomation.Utilities;
+using Securiton.HealthRecordAutomation.Pages;
+using HealthRecordAutomation.Pages;
 
 namespace Securiton.HealthRecordAutomation
 {
@@ -19,26 +21,29 @@ namespace Securiton.HealthRecordAutomation
         //[TestCase("accountant", "accountant", "English (Indian)", "OpenEMR")]
         public void ValidLoginTest(string username,string password,string language,string expectedTitle)
         {
-            driver.FindElement(By.Id("authUser")).SendKeys(username);
-            driver.FindElement(By.CssSelector("#clearPass")).SendKeys(password);
-            SelectElement selectLanguage = new SelectElement(driver.FindElement(By.CssSelector("select[name='languageChoice']")));
-            selectLanguage.SelectByText(language);
-            driver.FindElement(By.Id("login-button")).Click();
+            LoginPage loginPage = new LoginPage(driver);
+
+            loginPage.EnterUsername(username);
+            loginPage.EnterPassword(password);
+            loginPage.SelectLanaguageByText(language);
+            loginPage.ClickOnLogin();
 
             //wait for page load to complete 
-            Assert.That(driver.Title, Is.EqualTo(expectedTitle));
+            MainPage mainPage=new MainPage(driver);
+            Assert.That(mainPage.MainPageTitle, Is.EqualTo(expectedTitle));
         }
 
         [Test]
         public void InvalidLoginTest()
         {
-            driver.FindElement(By.Id("authUser")).SendKeys("john");
-            driver.FindElement(By.CssSelector("#clearPass")).SendKeys("john123");
-            SelectElement selectLanguage = new SelectElement(driver.FindElement(By.CssSelector("select[name='languageChoice']")));
-            selectLanguage.SelectByText("English (Indian)");
-            driver.FindElement(By.Id("login-button")).Click();
+            LoginPage loginPage = new LoginPage(driver);
 
-            string actualError= driver.FindElement(By.XPath("//p[contains(text(),'Invalid')]")).Text;
+            loginPage.EnterUsername("john");
+            loginPage.EnterPassword("john123");
+            loginPage.SelectLanaguageByText("English (Indian)");
+            loginPage.ClickOnLogin();
+
+            string actualError= loginPage.GetInvalidErrorMessage();
 
             //assert the error Invalid username or password
             Assert.True(actualError.Contains("invalid username"),
