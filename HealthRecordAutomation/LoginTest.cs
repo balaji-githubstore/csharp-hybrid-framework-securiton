@@ -7,15 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Securiton.Base;
 using OpenQA.Selenium.Support.UI;
+using Securiton.HealthRecordAutomation.Utilities;
 
 namespace Securiton.HealthRecordAutomation
 {
     public class LoginTest : AutomationWrapper
     {
         
-        [Test]
-        [TestCase("admin","pass","English (Indian)","OpenEMR")]
-        [TestCase("accountant", "accountant", "English (Indian)", "OpenEMR")]
+        [Test,TestCaseSource(typeof(DataSource),nameof(DataSource.ValidLoginData))]
+        //[TestCase("admin","pass","English (Indian)","OpenEMR")]
+        //[TestCase("accountant", "accountant", "English (Indian)", "OpenEMR")]
         public void ValidLoginTest(string username,string password,string language,string expectedTitle)
         {
             driver.FindElement(By.Id("authUser")).SendKeys(username);
