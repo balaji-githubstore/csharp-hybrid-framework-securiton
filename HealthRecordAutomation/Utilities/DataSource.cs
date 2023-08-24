@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Securiton.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,14 @@ using System.Threading.Tasks;
 namespace Securiton.HealthRecordAutomation.Utilities
 {
     public class DataSource
-    {
+    { 
+        public static object[] ValidDataJson()
+        {
+            //object[] allData=JsonUtils.GetJsonIntoObjectArray("C:\\Mine\\Company\\Securiton\\HealthRecordAutomationSln\\HealthRecordAutomation\\TestData\\data.json", "validLoginData");
+            object[] allData = JsonUtils.GetJsonIntoObjectArray("C:\\data.json", "validLoginData");
+            return allData;
+        }
+
         public static object[] ValidLoginData()
         {
             object[] data1 = new object[4];

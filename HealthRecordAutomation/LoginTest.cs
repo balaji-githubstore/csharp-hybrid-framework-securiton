@@ -16,7 +16,7 @@ namespace Securiton.HealthRecordAutomation
     public class LoginTest : AutomationWrapper
     {
         
-        [Test,TestCaseSource(typeof(DataSource),nameof(DataSource.ValidLoginData))]
+        [Test,TestCaseSource(typeof(DataSource),nameof(DataSource.ValidDataJson))]
         //[TestCase("admin","pass","English (Indian)","OpenEMR")]
         //[TestCase("accountant", "accountant", "English (Indian)", "OpenEMR")]
         public void ValidLoginTest(string username,string password,string language,string expectedTitle)
@@ -33,7 +33,7 @@ namespace Securiton.HealthRecordAutomation
             Assert.That(mainPage.MainPageTitle, Is.EqualTo(expectedTitle));
         }
 
-        [Test]
+        [Test, Category("smoke")]
         public void InvalidLoginTest()
         {
             LoginPage loginPage = new LoginPage(driver);
@@ -46,7 +46,7 @@ namespace Securiton.HealthRecordAutomation
             string actualError= loginPage.GetInvalidErrorMessage();
 
             //assert the error Invalid username or password
-            Assert.True(actualError.Contains("invalid username"),
+            Assert.True(actualError.Contains("Invalid username"),
                 "Assertion on Error message - actual error: "+actualError);
         }
 

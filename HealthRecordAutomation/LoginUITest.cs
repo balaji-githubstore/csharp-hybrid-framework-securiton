@@ -12,14 +12,14 @@ namespace Securiton.HealthRecordAutomation
     
     public class LoginUITest : AutomationWrapper
     {
-        [Test]
+        [Test,Category("UI"),Category("smoke")]
         public void VerifyTitleTest()
         {
             string actualTitle = driver.Title;
             Assert.That(actualTitle, Is.EqualTo("OpenEMR Login"));
         }
 
-        [Test]
+        [Test, Category("UI")]
         public void VerifyPlaceholderTest()
         {
           string actualUserNamePlaceholder=  driver.FindElement(By.Id("authUser")).GetAttribute("placeholder");
