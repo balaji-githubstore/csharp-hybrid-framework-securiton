@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Securiton.Base;
 using System;
@@ -16,6 +17,7 @@ namespace Securiton.HealthRecordAutomation
         public void VerifyTitleTest()
         {
             string actualTitle = driver.Title;
+            test.Log(Status.Info, "Actual Title as" + actualTitle);
             Assert.That(actualTitle, Is.EqualTo("OpenEMR Login"));
         }
 

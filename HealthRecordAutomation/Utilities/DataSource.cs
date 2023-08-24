@@ -11,8 +11,8 @@ namespace Securiton.HealthRecordAutomation.Utilities
     { 
         public static object[] ValidDataJson()
         {
-            //object[] allData=JsonUtils.GetJsonIntoObjectArray("C:\\Mine\\Company\\Securiton\\HealthRecordAutomationSln\\HealthRecordAutomation\\TestData\\data.json", "validLoginData");
-            object[] allData = JsonUtils.GetJsonIntoObjectArray("C:\\data.json", "validLoginData");
+            object[] allData=JsonUtils.GetJsonIntoObjectArray("C:\\Mine\\Company\\Securiton\\HealthRecordAutomationSln\\HealthRecordAutomation\\TestData\\data.json", "validLoginData");
+            //object[] allData = JsonUtils.GetJsonIntoObjectArray("C:\\data.json", "validLoginData");
             return allData;
         }
 
