@@ -1,23 +1,42 @@
-﻿using OpenQA.Selenium;
+﻿using HealthRecordAutomation;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace P.HealthRecordAutomation
 {
-    [TestFixture("ch")]
-    [TestFixture("edge")]
-    [Parallelizable(ParallelScope.All)]
-    public class Demo2Test
+
+    public class MyFixtureData1
+    {
+        public static IEnumerable FixtureParams1
+        {
+            get
+            {
+                yield return new Demo2TestFixture("ch");
+                //yield return new Demo2TestFixture("edge");
+                //yield return new Demo2TestFixture("ff");
+            }
+        }
+    }
+
+
+    //[TestFixture("ch")]
+    //[TestFixture("edge")]
+    //[Parallelizable(ParallelScope.All)]
+    [TestFixtureSource(typeof(MyFixtureData1), nameof(MyFixtureData1.FixtureParams1))]
+    public class Demo2TestFixture
     {
         IWebDriver driver;
         readonly string browser;
 
-        public Demo2Test(string browser)
+        public Demo2TestFixture(string browser)
         {
             this.browser = browser;
         }
@@ -56,7 +75,7 @@ namespace P.HealthRecordAutomation
         }
 
         [Test]
-        public void T2() {
+        public void T2([Random(23333, 99999, 5)] double d) {
             Thread.Sleep(5000);
             Console.WriteLine(driver.Title);
             driver.Quit();

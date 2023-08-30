@@ -1,5 +1,7 @@
 {
   "browser": "ch",
+  "browsers": ["ch","edge"],
+  "machine": "local",
   "validLoginData": [
     [ "admin", "pass", "English (Indian)", "OpenEMR" ],
     [ "physician", "physician", "English (Indian)", "OpenEMR"]

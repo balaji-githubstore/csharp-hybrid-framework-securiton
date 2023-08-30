@@ -55,6 +55,8 @@ namespace Securiton.Base
 
             if (testStatus == TestStatus.Failed)
             {
+                //TestContext.CurrentContext.Test.FullName
+                //write to text file-
                 string stackTrace = TestContext.CurrentContext.Result.StackTrace;
                 string message = TestContext.CurrentContext.Result.Message;
 

@@ -12,6 +12,19 @@ namespace Demo5.HealthRecordAutomation
     public class Demo5Json
     {
         [Test]
+        public void Demo()
+        {
+            
+            
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(5.2, 5);
+                Assert.AreEqual(3.9, 3.0);
+            });
+
+            Console.WriteLine("done");
+        }
+        [Test]
         public void ExtentReportDemo()
         {
             //only once for the entire session - [OneTimeSetup]
